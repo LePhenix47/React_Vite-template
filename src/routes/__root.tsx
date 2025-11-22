@@ -1,11 +1,50 @@
+import { useEffect } from 'react';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import { useAppStore } from '@/stores/useAppStore';
 
 export const Route = createRootRoute({
   component: RootComponent,
 });
 
 function RootComponent() {
+  // Theme logic - ONLY place where theme class is applied
+  const theme = useAppStore((state) => state.theme);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const abortController = new AbortController();
+
+    const applyTheme = (currentTheme: 'light' | 'dark' | 'system') => {
+      const isDark =
+        currentTheme === 'dark' ||
+        (currentTheme === 'system' && mediaQuery.matches);
+      root.classList.toggle('dark', isDark);
+      root.classList.toggle('light', !isDark);
+    };
+
+    // Apply theme immediately
+    applyTheme(theme);
+
+    // Listen for OS theme changes when in system mode
+    const handleChange = () => {
+      if (theme !== 'system') {
+        return;
+      }
+      applyTheme(theme);
+    };
+
+    mediaQuery.addEventListener('change', handleChange, {
+      signal: abortController.signal,
+    });
+
+    return () => {
+      abortController.abort();
+    };
+  }, [theme]);
+
   return (
     <>
       <header className="header" data-element="header">
