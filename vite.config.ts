@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
 import path from "path";
 import autoprefixer from "autoprefixer";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
+  plugins: [react()],
   server: {
     port: 5173, // Change the port to your preferred one
     host: "0.0.0.0", // Allows access to your local IP address
@@ -33,6 +35,6 @@ export default defineConfig({
       "@utils": path.resolve(__dirname, "src/utils"),
       "@sass": path.resolve(__dirname, "src/sass"),
     },
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
 });
