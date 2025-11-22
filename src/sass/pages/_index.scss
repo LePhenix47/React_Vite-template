@@ -1,12 +1,6 @@
 @use "../utils/" as *;
 
-.index {
-    @include center-flex-column(20px);
-
-    --_square-size: 100px;
-
-    overflow: hidden;
-}
+.index {}
 
 @view-transition {
     navigation: auto;

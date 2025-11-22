@@ -15,6 +15,14 @@
         }
     }
 
+    #root {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        min-height: 100svh;
+
+        background-color: var(--bg-primary);
+    }
+
     /* 
      *  This selector targets input, textarea and select elements that are 
      *  autofilled by the browser whether they are focused or not.
@@ -69,23 +77,23 @@
     }
 
     body {
-        display: grid;
-        grid-template-rows: auto 1fr auto;
+        display: flex;
+        flex-direction: column;
         min-height: 100svh;
 
         min-height: 100svh;
         overflow-x: hidden;
-        background-color: var(--bg-primary);
-        color: var(--color-primary);
 
         transition:
             background-color 350ms ease-in-out,
             filter 350ms ease-in-out,
             color 350ms ease-in-out,
         ;
+
+        interpolate-size: allow-keywords;
     }
 
-    :is(ul, ol) {
+    :is(ul, ol, menu) {
         list-style-type: none;
     }
 
@@ -100,6 +108,15 @@
         font-family: inherit;
 
         color: var(--color-primary);
+
+        display: grid;
+        grid-template-areas: "stack";
+        justify-items: stretch;
+
+        &>* {
+            grid-area: stack;
+
+        }
 
         &:hover {
             cursor: pointer;
@@ -461,7 +478,7 @@
             }
         }
 
-        &[type="range"] {
+        &[type="range"]:not([data-range-style="overflowing-thumb"]) {
             &:hover {
                 cursor: grab;
             }
@@ -544,6 +561,93 @@
                 height: var(--_thumb-height);
 
                 box-shadow: var(--_inner-track-offset) 0 0 var(--_inner-track-size) var(--_inner-track-bg);
+            }
+        }
+
+        &[type="range"][data-range-style="overflowing-thumb"] {
+            align-items: center;
+            display: flex;
+
+            --_progress-bg: red;
+            --_range-bg: rgba(0, 0, 0, 25%);
+
+            --_range-height: 5px;
+            --_input-interaction-zone-height: 35px;
+
+            --_progress-border-radius: 100vmax;
+
+            --_webkit-progression-width: 50%;
+
+            --_thumb-size: 15px;
+            --_thumb-border-radius: 50%;
+            --_thumb-bg: var(--_progress-bg);
+
+            border-radius: var(--_progress-border-radius);
+            height: var(--_input-interaction-zone-height);
+
+            background: none;
+            appearance: none;
+
+            &:hover {
+                cursor: grab;
+            }
+
+            &:active {
+                cursor: grabbing;
+            }
+
+            // * WebKit & Chromium
+            &::-webkit-slider-thumb {
+                appearance: none;
+
+                border: none;
+                border-radius: var(--_thumb-border-radius);
+
+                background: var(--_thumb-bg);
+
+                height: var(--_thumb-size);
+                width: var(--_thumb-size);
+
+                --_middle: calc(-1 * (var(--_thumb-size) - var(--_range-height)) / 2);
+
+                translate: 0% var(--_middle, 0%);
+
+                border: none;
+            }
+
+            &::-webkit-slider-runnable-track {
+                border-radius: inherit;
+                height: var(--_range-height);
+
+                background-image: linear-gradient(90deg,
+                        var(--_progress-bg) var(--_webkit-progression-width),
+                        var(--_range-bg) var(--_webkit-progression-width));
+            }
+
+            &::-webkit-slider-container {
+                border-radius: inherit;
+                height: var(--_range-height);
+            }
+
+            // * Mozilla Firefox
+            &::-moz-range-thumb {
+                background-color: var(--_progress-bg);
+                height: var(--_thumb-size);
+                width: var(--_thumb-size);
+                border: none;
+                border-radius: var(--_thumb-border-radius);
+            }
+
+            &::-moz-range-progress {
+                background-color: var(--_progress-bg);
+                border-radius: inherit;
+                height: var(--_range-height);
+            }
+
+            &::-moz-range-track {
+                height: var(--_range-height);
+                border-radius: inherit;
+                background-color: var(--_range-bg);
             }
         }
     }

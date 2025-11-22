@@ -1,9 +1,9 @@
-@media (prefers-color-scheme: dark) {
-
-    //CSS
+.dark {
     :root {
-        --bg-primary: #050505;
-        --bg-secondary: black;
+        --bg-primary: #0f0f0f;
+        --bg-secondary: #1a1a1a;
+        --bg-hover: #2a2a2a;
+        --bg-active: #333333;
 
         --color-primary: #cdcdcd;
         --color-primary--hover: #bfbfbf;
@@ -21,9 +21,6 @@
         --scrollbar-thumb-bg-color: #ababab;
         --scrollbar-thumb-bg-color--hover: #8a8a8a;
         --scrollbar-thumb-bg-color--active: #4f4f4f;
-
-        --selection-bg: #838383;
-        --selection-color: white;
     }
 
     ::backdrop {

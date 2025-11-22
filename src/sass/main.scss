@@ -11,9 +11,11 @@
 //Layout
 @forward "./layout/header";
 @forward "./layout/footer";
+@forward "./layout/app-layout";
 
 //Pages
 @forward "./pages/index";
 
 //Themes
 @forward "./themes/dark-theme";
+@forward "./themes/light-theme";
