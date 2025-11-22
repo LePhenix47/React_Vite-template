@@ -27,6 +27,9 @@
     "noUnusedParameters": false,
     "outDir": "./dist",
     "paths": {
+      "@/*": [
+        "./src/*"
+      ],
       "@assets/*": [
         "./src/assets/*"
       ],
@@ -44,6 +47,12 @@
       ],
       "@utils/*": [
         "./src/utils/*"
+      ],
+      "@stores/*": [
+        "./src/stores/*"
+      ],
+      "@schemas/*": [
+        "./src/schemas/*"
       ]
     },
     "preserveConstEnums": true,

@@ -20,6 +20,9 @@
   ],
   "author": "Younes LAHOUITI",
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.91.0",
+    "@tanstack/router-devtools": "^1.139.1",
+    "@tanstack/router-plugin": "^1.139.1",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
@@ -42,7 +45,12 @@
     "@lephenix47/cookies-utility": "^1.0.2",
     "@lephenix47/timers-utility": "^1.2.0",
     "@lephenix47/webstorage-utility": "^1.2.0",
+    "@tanstack/react-query": "^5.90.10",
+    "@tanstack/react-router": "^1.139.1",
+    "gsap": "^3.13.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "zod": "^4.1.12",
+    "zustand": "^5.0.8"
   }
 }
