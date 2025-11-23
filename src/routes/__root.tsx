@@ -1,10 +1,17 @@
 import { useEffect } from 'react';
-import { createRootRoute, Outlet, HeadContent, Scripts } from '@tanstack/react-router';
+import { createRootRoute, Outlet, HeadContent, Scripts, useNavigate } from '@tanstack/react-router';
 import { createPortal } from 'react-dom';
 import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import { useAppStore } from '@/stores/useAppStore';
 
 export const Route = createRootRoute({
+  notFoundComponent: () => {
+    const navigate = useNavigate();
+    // Navigate to the 404 route, replacing the current invalid route in history
+    // This prevents the invalid route from being in the history stack
+    navigate({ to: '/404', replace: true });
+    return null;
+  },
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
