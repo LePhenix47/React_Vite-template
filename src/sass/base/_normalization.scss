@@ -17,8 +17,9 @@
 
     #root {
         display: grid;
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: [header-start] auto [header-end main-start] 1fr [main-end footer-start] auto [footer-end];
         min-height: 100svh;
+        grid-auto-rows: 0%;
 
         color: var(--color-primary);
         background-color: var(--bg-primary);

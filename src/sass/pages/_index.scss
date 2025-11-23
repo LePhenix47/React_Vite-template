@@ -1,6 +1,8 @@
 @use "../utils/" as *;
 
-.index {}
+.index {
+    grid-row: main;
+}
 
 @view-transition {
     navigation: auto;
