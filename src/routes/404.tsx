@@ -12,12 +12,20 @@ export const Route = createFileRoute('/404')({
 });
 
 function NotFoundComponent() {
+  const router = useRouter();
   const navigate = useNavigate();
 
   const goBack = () => {
-    // Simply navigate back using the router's navigate with from
-    // This will use TanStack Router's internal navigation (no reload)
-    navigate({ from: '/404', to: '..' });
+    // Check if we can safely go back in history
+    // Since we used replace: true when navigating to /404,
+    // going back should take us to the last valid route
+    if (window.history.length > 1) {
+      // Use router.history.back() which is async and doesn't reload
+      router.history.back();
+    } else {
+      // No history, navigate to home
+      navigate({ to: '/' });
+    }
   };
 
   return (
