@@ -134,7 +134,7 @@ function RootComponent() {
 
       <header className="header" data-element="header">
         <svg className="hide header__svg-filters"></svg>
-        <h1 className="header__title" title="Title">Chess</h1>
+        <h1 className="header__title" title="Title">React Template</h1>
       </header>
 
       <main className="index" data-element="index">
