@@ -22,6 +22,13 @@ declare module "@tanstack/react-router" {
   }
 }
 
+// Handle GitHub Pages 404 redirect
+const redirect = sessionStorage.getItem('redirect');
+if (redirect) {
+  sessionStorage.removeItem('redirect');
+  window.history.replaceState(null, '', redirect);
+}
+
 // Create a QueryClient instance
 const queryClient = new QueryClient({
   defaultOptions: {
