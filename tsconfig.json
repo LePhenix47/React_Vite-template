@@ -13,7 +13,7 @@
       "DOM",
       "DOM.Iterable"
     ],
-    "module": "ES6",
+    "module": "ESNext",
     "moduleDetection": "force",
     "moduleResolution": "bundler",
     "noEmit": true,
@@ -53,13 +53,16 @@
       ],
       "@schemas/*": [
         "./src/schemas/*"
+      ],
+      "@env": [
+        "./src/env.ts"
       ]
     },
     "preserveConstEnums": true,
     "rootDir": "./",
     "skipLibCheck": true,
     "strict": false,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "target": "ESNext",
     "useDefineForClassFields": true
   },

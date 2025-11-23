@@ -7,6 +7,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ mode }) => ({
   plugins: [TanStackRouterVite(), react(), tsconfigPaths()],
+  envPrefix: ["VITE_"],
   server: {
     port: 5173, // Change the port to your preferred one
     host: "0.0.0.0", // Allows access to your local IP address
