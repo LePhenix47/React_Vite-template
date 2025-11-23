@@ -1,4 +1,4 @@
-name: Deploy Chess project to GitHub Pages
+name: Deploy React Vite Template to GitHub Pages
 on:
   push:
     branches:
@@ -12,6 +12,7 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - uses: actions/checkout@v4
 
@@ -22,6 +23,13 @@ jobs:
 
       - name: Install dependencies
         run: bun install
+
+      - name: Create .env file from example and GitHub variables/secrets
+        run: |
+          # Copy mandatory variables from .env.example (everything before # Facultative)
+          sed '/# Facultative/,$d' .env.example > .env
+          # Add any secret variables from GitHub Secrets here
+          # Example: echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" >> .env
 
       - name: Build site
         run: bun run build
