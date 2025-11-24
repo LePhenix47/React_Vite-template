@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { createRootRoute, Outlet, HeadContent, Scripts, Link } from '@tanstack/react-router';
 import { createPortal } from 'react-dom';
-import { TanStackRouterDevtools } from '@tanstack/router-devtools';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { useAppStore } from '@/stores/useAppStore';
+import env from '@env';
 
 function NotFound() {
   return (
@@ -155,7 +156,7 @@ function RootComponent() {
       </footer>
 
       <Scripts />
-      <TanStackRouterDevtools position="bottom-right" />
+      {env.DEV && <TanStackRouterDevtools position="bottom-right" />}
     </>
   );
 }
