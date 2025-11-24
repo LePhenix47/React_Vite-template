@@ -138,36 +138,42 @@ async function cleanup() {
 
   // 4. Update src/routes/index.tsx
   console.log('\n🏠 Updating home page...');
-  const indexContent = `import { createFileRoute } from "@tanstack/react-router";
-import { createPortal } from "react-dom";
+  const indexContent = `import { createFileRoute } from '@tanstack/react-router';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
-export const Route = createFileRoute("/")({
-  component: Index,
+export const Route = createFileRoute('/')({
+  head: () => ({
+    meta: [
+      { title: 'Home - ${projectName}' },
+      {
+        name: 'description',
+        content: '${description}'
+      },
+      { property: 'og:title', content: 'Home - ${projectName}' },
+      {
+        property: 'og:description',
+        content: '${description}'
+      },
+      { property: 'og:url', content: '${website}' },
+      { name: 'twitter:title', content: 'Home - ${projectName}' },
+      {
+        name: 'twitter:description',
+        content: '${description}'
+      },
+    ],
+  }),
+  component: IndexComponent,
 });
 
-function Index() {
-  const HeadContent = (
-    <>
-      <title>${projectName}</title>
-      <meta name="description" content="${description}" />
-      <meta property="og:title" content="${projectName}" />
-      <meta property="og:description" content="${description}" />
-      <meta property="og:url" content="${website}" />
-      <meta name="twitter:title" content="${projectName}" />
-      <meta name="twitter:description" content="${description}" />
-    </>
-  );
-
+function IndexComponent() {
   return (
-    <>
-      {createPortal(HeadContent, document.head)}
-      <main className="main">
-        <section className="section">
-          <h1>${projectName}</h1>
-          <p>{description}</p>
-        </section>
-      </main>
-    </>
+    <div>
+      <ThemeToggle />
+
+      <h2>${projectName}</h2>
+
+      <p>${description}</p>
+    </div>
   );
 }
 `;
@@ -203,45 +209,64 @@ function Index() {
   console.log('\n📝 Updating README.md...');
   const readmeContent = `# ${projectName}
 
+## Table of Contents
+
+- [${projectName}](#${projectName.toLowerCase().replace(/\s+/g, '-')})
+  - [Table of Contents](#table-of-contents)
+  - [1. Description](#1-description)
+  - [2. Demo](#2-demo)
+  - [3. Technologies Used](#3-technologies-used)
+  - [4. Features](#4-features)
+  - [5. Usage](#5-usage)
+  - [6. Credits](#6-credits)
+  - [7. License](#7-license)
+
+## 1. Description
+
 ${description}
 
-## 🚀 Tech Stack
+## 2. Demo
 
-- **React 19** - UI library
-- **TypeScript** - Type safety
-- **Vite** - Build tool
-- **SASS** - Styling
-- **TanStack Router** - Routing
-- **TanStack Query** - Data fetching
-- **Zustand** - State management
-- **Zod** - Schema validation
-- **GSAP** - Animations
+You can see a live demo of the project at: [GitHub Pages](${website})
 
-## 📦 Installation
+## 3. Technologies Used
 
-\`\`\`bash
-bun install
-\`\`\`
+- React
+- TypeScript
+- Vite
+- SASS
+- TanStack Router
+- TanStack Query
+- Zustand
+- Zod
+- GSAP
 
-## 🛠️ Development
+<a href="https://react.dev/" target="_blank" rel="noreferrer" title="React"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg" width="36" height="36" alt="React" /></a>
+<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer" title="TypeScript"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="TypeScript" /></a>
+<a href="https://vitejs.dev/" target="_blank" rel="noreferrer" title="Vite"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/vite-colored.svg" width="36" height="36" alt="Vite" /></a>
+<a href="https://sass-lang.com/" target="_blank" rel="noreferrer" title="SASS"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/sass-colored.svg" width="36" height="36" alt="Sass" /></a>
 
-\`\`\`bash
-bun run dev
-\`\`\`
+## 4. Features
 
-## 🏗️ Build
+[Add your project features here]
 
-\`\`\`bash
-bun run build
-\`\`\`
+## 5. Usage
 
-## 👤 Author
+To get started with this project:
 
-${author}
+1. Clone the repository
+2. Install dependencies: \`bun install\`
+3. Update the \`.env\` file with your configuration
+4. Start the development server: \`bun run dev\`
+5. Build for production: \`bun run build\`
 
-## 📄 License
+## 6. Credits
 
-ISC
+This project was created by ${author}.
+
+## 7. License
+
+This project is licensed under the ISC License.
 `;
   if (writeFile('README.md', readmeContent)) {
     modified.push('README.md');
